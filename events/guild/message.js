@@ -33,9 +33,9 @@ module.exports = async (client, message) => {
     if (cmd.length === 0) return message.channel.send(new Discord.MessageEmbed()
       .setColor(ee.wrongcolor)
       .setFooter(ee.footertext, ee.footericon)
-      .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
-      .setDescription(`To play Music simply type \`${prefix}play <Title / Url>\`\n\nTo create a unique Requesting Setup type \`${prefix}setup\``)
-    )
+      .setTitle(`❌ Không rõ command, thử lại: **\`${prefix}help\`**`)
+      .setDescription(`Play nhạc trên AIO BOT với: \`${prefix}play <Title / Url>\`\n\nTo create a unique Requesting Setup type \`${prefix}setup\``)
+    ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
     //get the command from the collection
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
@@ -47,7 +47,7 @@ module.exports = async (client, message) => {
         }
         const now = Date.now(); //get the current time
         const timestamps = client.cooldowns.get(command.name); //get the timestamp of the last used commands
-        const cooldownAmount = (command.cooldown || 1.5) * 1000; //get the cooldownamount of the command, if there is no cooldown there will be automatically 1 sec cooldown, so you cannot spam it^^
+        const cooldownAmount = (command.cooldown || 1) * 1000; //get the cooldownamount of the command, if there is no cooldown there will be automatically 1 sec cooldown, so you cannot spam it^^
         if (timestamps.has(message.author.id)) { //if the user is on cooldown
           const expirationTime = timestamps.get(message.author.id) + cooldownAmount; //get the amount of time he needs to wait until he can run the cmd again
           if (now < expirationTime) { //if he is still on cooldonw
@@ -55,8 +55,8 @@ module.exports = async (client, message) => {
             return message.channel.send(new Discord.MessageEmbed()
               .setColor(ee.wrongcolor)
               .setFooter(ee.footertext,ee.footericon)
-              .setTitle(`❌ Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-            ); //send an information message
+              .setTitle(`❌ Hãy đợi ${timeLeft.toFixed(1)} giây trước khi dùng lại \`${command.name}\` command.`)
+            ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray))); //send an information message
           }
         }
         timestamps.set(message.author.id, now); //if he is not on cooldown, set it to the cooldown
@@ -79,7 +79,7 @@ module.exports = async (client, message) => {
           .setColor(ee.wrongcolor)
           .setFooter(ee.footertext, ee.footericon)
           .setTitle("❌ Error | I don't have enough Permissions!")
-          .setDescription("Please give me ADMINISTRATOR, because i need it to delete Messages, Create Channel and execute all Admin Commands "))
+          .setDescription("Please give me ADMINISTRATOR, because i need it to delete Messages, Create Channel and execute all Admin Commands ")).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //run the command with the parameters:  client, message, args, user, text, prefix,
         command.run(client, message, args, message.member, args.join(" "), prefix);
@@ -97,8 +97,8 @@ module.exports = async (client, message) => {
     return message.channel.send(new Discord.MessageEmbed()
       .setColor(ee.wrongcolor)
       .setFooter(ee.footertext, ee.footericon)
-      .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
-      .setDescription(`To play Music simply type \`${prefix}play <Title / Url>\``)
+      .setTitle(`❌ Không rõ Command, hãy thử lại: **\`${prefix}help\`**`)
+      .setDescription(`Nghe nhạc trên AIO BOT với command: \`${prefix}play <Title / Url>\``)
     ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
   }catch (e){
     return message.channel.send(
@@ -108,13 +108,4 @@ module.exports = async (client, message) => {
     .setDescription(`\`\`\`${e.stack}\`\`\``)
 );
   }
-  /**
-    * @INFO
-    * Bot Coded by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template
-    * @INFO
-    * Work for Milrato Development | https://milrato.eu
-    * @INFO
-    * Please mention Him / Milrato Development, when using this Code!
-    * @INFO
-  */
 }

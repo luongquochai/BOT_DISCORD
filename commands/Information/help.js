@@ -30,7 +30,7 @@ module.exports = {
               embed.addField("**Useage**", `\`${config.prefix}${cmd.useage}\``);
               embed.setFooter("Syntax: <> = required, [] = optional");
           }
-          return message.channel.send(embed.setColor(ee.main));
+          return message.channel.send(embed.setColor(ee.main)).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         } else {
           const embed = new MessageEmbed()
               .setColor(ee.color)
@@ -61,7 +61,7 @@ module.exports = {
           } catch (e) {
               console.log(String(e.stack).red);
           }
-          message.channel.send(embed);
+          message.channel.send(embed).then(msg=>msg.delete({timeout: 15000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
       }
     } catch (e) {
         console.log(String(e.stack).bgRed)
@@ -74,12 +74,3 @@ module.exports = {
     }
   }
 }
-/**
-  * @INFO
-  * Bot Coded by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template
-  * @INFO
-  * Work for Milrato Development | https://milrato.eu
-  * @INFO
-  * Please mention Him / Milrato Development, when using this Code!
-  * @INFO
-*/

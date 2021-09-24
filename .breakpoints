@@ -1,0 +1,18 @@
+{
+  "files": {
+    "commands/Music/play.js": [
+      {
+        "id": "82672f48-ebc4-4313-92ce-13e675d8d73a",
+        "line": 11,
+        "version": 2,
+        "index": 359
+      },
+      {
+        "id": "b7bcbabb-ae2f-43c5-aab1-26c51a25b89a",
+        "line": 24,
+        "version": 2,
+        "index": 1015
+      }
+    ]
+  }
+}

@@ -13,8 +13,13 @@
     "@discordjs/opus": "^0.6.0",
     "discord.js": "^12.5.1",
     "distube": "^2.8.18",
+    "enmap": "^5.8.7",
+    "express": "^4.17.1",
     "ffmpeg-static": "^4.4.0",
-    "nodemon": "^2.0.12"
+    "node-fetch": "^3.0.0",
+    "nodemon": "^2.0.12",
+    "opusscript": "0.0.8",
+    "pm2": "^5.1.1"
   },
   "devDependencies": {
     "ascii-table": "0.0.9",
